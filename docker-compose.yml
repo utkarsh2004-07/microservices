@@ -8,7 +8,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - mongodb+srv://utkarshsingh500500:AvNQD31mJn4ATxf2@cluster0.zhpzk7l.mongodb.net/taskapp
+      - mongodb+srv://utkarshsingh500500:AvNQD31mJn4ATxf2@cluster0.zhpzk7l.mongodb.net/taskapp?retryWrites=true&w=majority&appName=Cluster0
     ports:
       - "4000:4000"
     networks:
@@ -21,25 +21,14 @@ services:
     depends_on:
       - auth
     environment:
-      - mongodb+srv://utkarshsingh500500:AvNQD31mJn4ATxf2@cluster0.zhpzk7l.mongodb.net/taskapp
+      - mongodb+srv://utkarshsingh500500:AvNQD31mJn4ATxf2@cluster0.zhpzk7l.mongodb.net/taskapp?retryWrites=true&w=majority&appName=Cluster0
     ports:
       - "4001:4001"
     networks:
       - backend
 
 
-  mongo:
-    image: mongo:6
-    container_name: mongo
-    restart: always
-    volumes:
-      - mongo-data:/data/db
-    ports:
-      - "27017:27017"   # optional (allows external access)
-    networks:
-      - backend
-
-
+ 
   nginx:
     image: nginx
     container_name: api-gateway
@@ -57,5 +46,4 @@ services:
 networks:
   backend:
 
-volumes:
-  mongo-data:
+
