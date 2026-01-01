@@ -5,8 +5,7 @@ services:
     build: ./auth
     container_name: auth-service
     restart: always
-    depends_on:
-      - mongo
+    
     environment:
       - mongodb+srv://utkarshsingh500500:AvNQD31mJn4ATxf2@cluster0.zhpzk7l.mongodb.net/taskapp?retryWrites=true&w=majority&appName=Cluster0
     ports:
