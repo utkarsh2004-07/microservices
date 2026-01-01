@@ -9,7 +9,7 @@ app.use(express.json());
 const SECRET = "SUPER_SECRET_KEY";
 
 // 📌 Connect to MongoDB (inside docker)
-mongoose.connect(process.env.MONGO_URL || "mongodb://mongo:27017/taskapp")
+mongoose.connect(process.env.MONGO_URL || "mongodb+srv://utkarshsingh500500:AvNQD31mJn4ATxf2@cluster0.zhpzk7l.mongodb.net/taskapp?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log("Auth DB Connected"))
   .catch(err => console.error("Mongo Error:", err));
 
