@@ -1,0 +1,88 @@
+### Node.js ###
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+logs/**
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+*.lcov
+
+# IDE settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Mac system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux system files
+*~
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Docker
+docker-data/
+mongo-data/
+*.pid
+*.seed
+*.pid.lock
+
+# Containers / Compose
+*.tfstate
+*.tar
+*.zip
+
+# Nginx runtime files
+nginx/*.crt
+nginx/*.key
+
+# Optional: ignore temporary files
+tmp/
+temp/
+
+### Node service folders ###
+auth/node_modules/
+task/node_modules/
+frontend/node_modules/
+
+# If you add more services later:
+*/node_modules/
+
+### MongoDB data (local volume) ###
+data/
+db/
+mongo-data/
+
+### Environment Files ###
+auth/.env
+task/.env
+nginx/.env
+
+### Build Output from Frontend (later) ###
+frontend/.next/
+frontend/out/
+frontend/build/

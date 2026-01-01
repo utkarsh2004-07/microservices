@@ -1,0 +1,67 @@
+import express from "express";
+import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+
+const app = express();
+app.use(express.json());
+
+// 🚨 Set same secret for Tasks & NGINX later
+const SECRET = "SUPER_SECRET_KEY";
+
+// 📌 Connect to MongoDB (inside docker)
+mongoose.connect(process.env.MONGO_URL || "mongodb://mongo:27017/taskapp")
+  .then(() => console.log("Auth DB Connected"))
+  .catch(err => console.error("Mongo Error:", err));
+
+
+const taskSchema = new mongoose.Schema({
+   title: String,
+   user: String
+});
+const Task = mongoose.model("User", taskSchema);
+
+
+function auth(req,res,next){
+    try {
+        const token=req.headers.authorization?.split(" ")[1];
+        const decode=jwt.verify(token,SECRET)
+        req.user=decode.email
+        next()
+        
+    } catch {
+            res.status(403).send("Not authorized");
+
+    }
+}
+
+
+app.get("/tasks",auth,async(req,res)=>{
+    const task=await Task.findOne({user:req.user})
+    res.json(task)
+})
+
+
+app.post("/tasks", auth, async (req, res) => {
+  const task = await Task.create({ title: req.body.title, user: req.user });
+  res.json(task);
+});
+
+
+app.listen(4001, () => console.log("Task service running 4001🚀"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
