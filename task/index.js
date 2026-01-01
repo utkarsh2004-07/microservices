@@ -41,10 +41,28 @@ app.get("/tasks",auth,async(req,res)=>{
 })
 
 
-app.post("/tasks", auth, async (req, res) => {
-  const task = await Task.create({ title: req.body.title, user: req.user });
-  res.json(task);
-});
+app.post("/tasks", auth, handleCreate);
+app.post("/tasks/", auth, handleCreate);
+
+async function handleCreate(req, res) {
+  try {
+    const task = await Task.create({ title: req.body.title, user: req.user });
+    res.json(task);
+  } catch (err) {
+    console.log("TASK ERROR:", err);
+    res.status(500).send("Task Creation Failed ❌");
+  }
+}
+
+
+
+
+
+
+// app.post("/tasks", auth, async (req, res) => {
+//   const task = await Task.create({ title: req.body.title, user: req.user });
+//   res.json(task);
+// });
 
 
 app.listen(4001, () => console.log("Task service running 4001🚀"));
